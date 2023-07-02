@@ -1,5 +1,5 @@
 # Ricky-BlipCreator
 Advanced Blip Creator | FiveM
 
-# Installation
-* asd
+# Discord
+https://discord.gg/tHAbhd94vS
