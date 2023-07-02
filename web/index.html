@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Blip Creator</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+
+        <div id="app">
+
+            <div v-if="this.config != false" class="containerBlipCreati">
+                <div class="title">{{this.config.Translate.blips_created}}</div>
+                <div class="containerBlip">
+                    <div @click="infoBlip(v.id)" v-for="v in listaBlip" class="blip">
+                        <span class="name">{{v.name}}</span>
+                        <span class="idBlip">#{{v.id}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="this.config != false" class="containerCreateBlip">
+
+                <div class="notify">
+                    <span></span>
+                </div>
+
+                <div class="title">{{this.config.Translate.create_new_blip}}</div>
+
+                <div class="infoDisplay">
+                    <div @click="closeViewDisplay()" class="closeViewDisplay"></div>
+                    <div class="containerListaDisplay">
+                        <div @click="setDisplayNumero(v.numero)" v-for="v in numeriDisplay" class="numero">
+                            <span>{{v.numero}}</span>
+                        </div>
+                    </div>
+
+                    <div class="immagine"></div>
+                </div>
+
+
+                <input type="text" class="newBlipName" :placeholder="this.config.Translate.enter_blip_name">
+                <input type="number" id="numberInput" :placeholder="this.config.Translate.sprite" class="newSprite">
+                <div @click="viewInfoSprite()" class="informationSprite"></div>
+                <input type="number" id="numberInput" :placeholder="this.config.Translate.color" class="newColor">
+                <div @click="viewInfoColor()" class="informationColor"></div>
+                <input type="number" id="numberInput" :placeholder="this.config.Translate.display" class="newDisplay">
+                <div @click="viewInfoDisplay()" class="informationDisplay"></div>
+                <input type="text" class="newPosition" :placeholder="this.config.Translate.position">
+                <div @click="setMyCoords()" class="setPositionPedCoords"><div class="setCoords"></div></div>
+                <div @click="createBlip()" class="createBlip"><span>{{this.config.Translate.create}}</span></div>
+            </div>
+
+            <div v-if="this.config != false" class="containerGestioneBlip">
+
+                <div class="notify">
+                    <span></span>
+                </div>
+
+                <div class="title">{{this.config.Translate.management_blip}} #{{blipSelected.id}}</div>
+
+                <div class="infoDisplay">
+                    <div @click="closeViewDisplay()" class="closeViewDisplay"></div>
+                    <div class="containerListaDisplay">
+                        <div @click="setDisplayNumero(v.numero)" v-for="v in numeriDisplay" class="numero">
+                            <span>{{v.numero}}</span>
+                        </div>
+                    </div>
+
+                    <div class="immagine"></div>
+                </div>
+
+                <input type="text" class="newBlipName" :placeholder="this.config.Translate.enter_blip_name" :value="blipSelected.name">
+                <input type="number" id="numberInput" :placeholder="this.config.Translate.sprite" class="newSprite" :value="blipSelected.sprite">
+                <div @click="viewInfoSprite()" class="informationSprite"></div>
+                <input type="number" id="numberInput" :placeholder="this.config.Translate.color" class="newColor" :value="blipSelected.color">
+                <div @click="viewInfoColor()" class="informationColor"></div>
+                <input type="number" id="numberInput" :placeholder="this.config.Translate.display" class="newDisplay" :value="blipSelected.display">
+                <div @click="viewInfoDisplay()" class="informationDisplay"></div>
+                <input type="text" class="newPosition" :placeholder="this.config.Translate.position" :value="blipSelected.x+','+blipSelected.y+','+blipSelected.z">
+                <div @click="setMyCoords()" class="setPositionPedCoords"><div class="setCoords"></div></div>
+                <div @click="deleteBlip()" class="deleteBlip"><span>{{this.config.Translate.delete_blip}}</span></div>
+                <div @click="applyModify()" class="createBlip"><span>{{this.config.Translate.apply_modify}}</span></div>
+            </div>
+        </div>
+
+        
+        <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js'></script>
+        <script src="./js/script.js"></script>
+    </body>
+</html>

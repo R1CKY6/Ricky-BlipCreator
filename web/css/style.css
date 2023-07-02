@@ -1,0 +1,416 @@
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url(../fonts/proxima_nova.otf);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: 'Proxima Nova';
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    font-style: normal;
+    color: white;
+    overflow: hidden;
+}
+
+#app {
+    display: none;
+    /* animation: fadeIn 1s ease; */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(63.56% 152.1% at 51.88% 65.97%, #000000 0%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.createBlip:hover,
+.blip:hover,
+.setPositionPedCoords:hover,
+.informationDisplay:hover,
+.numero:hover,
+.closeViewDisplay:hover,
+.deleteBlip:hover {
+    cursor: pointer;
+}
+
+.containerBlipCreati  {
+   position: absolute;
+   left: 2.963vh;
+   top: 3.7963vh;
+   width: 45.1852vh;
+   height: 92.4074vh;
+   background: rgba(216, 216, 216, 0.05);
+   border-radius: 0.9259vh;
+   border: 0.0926vh solid #464646;
+}
+
+.title {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    top: 5.2778vh;
+    font-size: 3.2407vh;
+}
+
+.containerBlipCreati .containerBlip {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 36.5741vh;
+    height: 42.4074vh;
+    top: 10.6481vh;
+}
+
+.containerBlip .blip {
+    position: relative;
+    height: 5vh;
+    width: 36.3889vh;
+    border-radius: 0.7407vh;
+    background: rgba(216, 216, 216, 0.05);
+    border: 0.0926vh solid #464646;
+    margin-bottom: 1.2963vh;
+}
+
+.blip .name {
+    position: absolute;
+    left: 0.5556vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 1.8519vh;
+}
+
+.blip .idBlip {
+    position: absolute;
+    right: 0.5556vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 1.8519vh;
+}
+
+.containerGestioneBlip {
+    display: none;
+    position: absolute;
+    left: 51.1111vh;
+    top: 3.7963vh;
+    width: 123.7037vh;
+    height: 92.4074vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+}
+
+.containerCreateBlip {
+    position: absolute;
+    left: 51.1111vh;
+    top: 3.7963vh;
+    width: 123.7037vh;
+    height: 92.4074vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+}
+
+@keyframes from-top-to-bottom {
+    0% {
+        top: -10vh;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes from-bottom-to-top {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -10vh;
+    }
+}
+
+.from-bottom-to-top {
+    animation: from-bottom-to-top 1s ease !important;
+}
+
+.notify,
+.notify2 {
+    display: none;
+    position: absolute;
+    height: 4.4444vh;
+    width: 100%;
+    animation: from-top-to-bottom 1s ease;
+}
+
+.notify span,
+.notify2 span {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
+}
+
+.containerCreateBlip .newBlipName,
+.containerGestioneBlip .newBlipName {
+    position: absolute;
+    top: 10.5556vh;
+    left: 50%;
+    transform: translate(-50%);
+    height: 7.3148vh;
+    width: 68.9815vh;
+    border-radius: 0.9259vh;
+    background: rgba(216, 216, 216, 0.05);
+    border: 0.0926vh solid #464646;
+    padding: 1vh;
+    color: white;
+    font-size: 2.037vh;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::placeholder {
+    color: #464646;
+}
+
+#numberInput {
+    position: relative;
+    display: flex;
+    margin-bottom: 4.6296vh;
+    left: 50%;
+    transform: translate(-50%);
+    top: 22.2222vh;
+    width: 15.7407vh;
+    height: 5.9259vh;
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+    background: rgba(216, 216, 216, 0.05);
+    font-size: 2.037vh;
+    padding: 1vh;
+    color: white;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.newPosition {
+    position: absolute;
+    top: 53.8889vh;
+    left: 44%;
+    transform: translate(-50%);
+    width: 49.6296vh;
+    height: 5.9259vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+    padding: 1vh;
+    font-size: 2.037vh;
+    color: white;
+}
+
+.createBlip {
+    position: absolute;
+    top: 80vh;
+    left: 50%;
+    transform: translate(-50%);
+    width: 36.4815vh;
+    height: 7.1296vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+}
+
+.deleteBlip {
+    position: absolute;
+    top: 70vh;
+    left: 50%;
+    transform: translate(-50%);
+    width: 36.4815vh;
+    height: 7.1296vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+}
+
+.createBlip span,
+.deleteBlip span {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.7778vh;
+}
+
+.setPositionPedCoords {
+    position: absolute;
+    top: 53.8889vh;
+    width: 6.6667vh;
+    height: 5.9259vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #464646;
+    left: 876px;
+}
+
+.setCoords {
+    position: absolute;
+    height: 100;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../img/setmyposition.png');
+}
+
+.informationSprite {
+    position: absolute;
+    width: 5.2778vh;
+    height: 5.2778vh;
+    top: 22.4vh;
+    left: 71.4074vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #474646;
+    background-image: url(../img/info.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.informationColor {
+    position: absolute;
+    width: 5.2778vh;
+    height: 5.2778vh;
+    top: 33.1vh;
+    left: 71.4074vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #474646;
+    background-image: url(../img/info.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.informationDisplay {
+    position: absolute;
+    width: 5.2778vh;
+    height: 5.2778vh;
+    top: 43.6111vh;
+    left: 71.4074vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    border: 0.0926vh solid #474646;
+    background-image: url(../img/info.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.infoDisplay {
+    display: none;
+    position: absolute;
+    top: 21.0185vh;
+    left: 85.1852vh;
+    width: 36.7593vh;
+    border-radius: 0.9259vh;
+    background: rgba(216, 216, 216, 0.05);
+    border: 0.0926vh solid #464646;
+    height: 24.9074vh;
+}
+
+.containerListaDisplay {
+    position: absolute;
+    left: 0.5556vh;
+    top: 0.6481vh;
+    width: 10.6481vh;
+    height: 24.2593vh;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+
+.numero {
+    position: relative;
+    top: 0.1556vh;
+    left: 0.3704vh;
+    height: 3.28vh;
+    width: 4.1667vh;
+    border-radius: 0.463vh;
+    border: 0.0926vh solid #464646;
+    background: rgba(216, 216, 216, 0.05);
+    margin-right: 0.8vh;
+}
+
+.numero span {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7778vh;
+    color: #464646;
+}
+
+
+.immagine {
+    position: absolute;
+    top: 0.5vh;
+    width: 19.5926vh;
+    height: 21.6667vh;
+    background: rgba(216, 216, 216, 0.05);
+    border-radius: 0.9259vh;
+    left: 11.5556vh;
+    border: 0.0926vh solid #464646;
+    color: #464646;
+    padding: 1vh;
+    overflow-y: auto;
+}
+
+
+.closeViewDisplay {
+    position: absolute;
+    left: 33.8889vh;
+    top: 0.463vh;
+    background-size: contain;
+    background-image: url('../img/close.png');
+    background-repeat: no-repeat;
+    height: 2.2222vh;
+    width: 2.2222vh;
+}
