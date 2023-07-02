@@ -12,7 +12,7 @@ client_scripts {
 }
 
 shared_scripts {
-    'config.lua',
+    'config.lua'
 }
 server_scripts {
     'server.lua'
@@ -25,5 +25,5 @@ files {
     'web/css/*.css',
     'web/js/*.js',
     'web/fonts/*.otf',
-    'web/img/*.png',
+    'web/img/*.png'
 }
