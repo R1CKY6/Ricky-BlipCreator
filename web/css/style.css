@@ -83,6 +83,7 @@
     width: 36.5741vh;
     height: 72.4074vh;
     top: 10.6481vh;
+   overflow-y: auto;
 }
 
 .containerBlip .blip {
