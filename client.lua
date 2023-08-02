@@ -1,16 +1,31 @@
-local ESX = exports.es_extended:getSharedObject()
+if Config.Framework == 'esx' then 
+    ESX = exports.es_extended:getSharedObject()
+elseif Config.Framework == 'qbcore' then
+    QBCore = exports['qb-core']:GetCoreObject()
+end
 
 local createdBlip = nil
 
 SonoStaff1 = function()
-    local staff1 = nil
-    ESX.TriggerServerCallback('ricky-server:blipSonoStaff', function(staff) 
-        staff1 = staff        
-    end)
-    while staff1 == nil do
-        Wait(100)
+    if Config.Framework == 'esx' then 
+        local staff1 = nil
+        ESX.TriggerServerCallback('ricky-server:blipSonoStaff', function(staff) 
+            staff1 = staff        
+        end)
+        while staff1 == nil do
+            Wait(100)
+        end
+        return staff1
+    elseif Config.Framework == 'qbcore' then
+        local staff1 = nil
+        QBCore.Functions.TriggerCallback('ricky-server:blipSonoStaff', function(staff) 
+            staff1 = staff        
+        end)
+        while staff1 == nil do
+            Wait(100)
+        end
+        return staff1
     end
-    return staff1
 end
 
 Citizen.CreateThread(function()
