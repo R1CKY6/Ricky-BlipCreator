@@ -24,23 +24,38 @@ SonoStaff1 = function()
         while staff1 == nil do
             Wait(100)
         end
+        print(staff1)
         return staff1
     end
 end
 
 Citizen.CreateThread(function()
 
-    while ESX.IsPlayerLoaded() == false do
-        Wait(100)
+    if Config.Framework == 'esx' then 
+        while ESX.IsPlayerLoaded() == false do
+            Wait(100)
+        end
+    
+       ESX.TriggerServerCallback('ricky-server:blipGetCreatedBlip', function(blip) 
+             createdBlip = blip
+       end)
+    
+       while createdBlip == nil do
+          Wait(100)
+       end
+    elseif Config.Framework == 'qbcore' then
+        while QBCore.Functions.GetPlayerData().job == nil do
+            Wait(100)
+        end
+    
+       QBCore.Functions.TriggerCallback('ricky-server:blipGetCreatedBlip', function(blip) 
+             createdBlip = blip
+       end)
+    
+       while createdBlip == nil do
+          Wait(100)
+       end
     end
-
-   ESX.TriggerServerCallback('ricky-server:blipGetCreatedBlip', function(blip) 
-         createdBlip = blip
-   end)
-
-   while createdBlip == nil do
-      Wait(100)
-   end
 
    UpdateBlip()
 end)
@@ -76,20 +91,37 @@ end
 
 
 OpenBlipCreator = function()
-ESX.TriggerServerCallback('ricky-server:blipGetCreatedBlip', function(createdBlip) 
-    if SonoStaff1() == false then 
-        return 
+    if Config.Framework == 'esx' then 
+        ESX.TriggerServerCallback('ricky-server:blipGetCreatedBlip', function(createdBlip) 
+            if SonoStaff1() == false then 
+                return 
+            end
+            SetNuiFocus(true, true)
+            postNUI({
+                type = "SET_CONFIG",
+                config = Config
+            })
+            postNUI({
+                type = "OPEN",
+                createdBlip = createdBlip
+            })
+        end)
+    elseif Config.Framework == 'qbcore' then
+        QBCore.Functions.TriggerCallback('ricky-server:blipGetCreatedBlip', function(createdBlip) 
+            if SonoStaff1() == false then 
+                return 
+            end
+            SetNuiFocus(true, true)
+            postNUI({
+                type = "SET_CONFIG",
+                config = Config
+            })
+            postNUI({
+                type = "OPEN",
+                createdBlip = createdBlip
+            })
+        end)
     end
-    SetNuiFocus(true, true)
-    postNUI({
-        type = "SET_CONFIG",
-        config = Config
-    })
-    postNUI({
-        type = "OPEN",
-        createdBlip = createdBlip
-    })
-end)
 end
 
 RegisterNUICallback('setMyCoords', function(data, cb)
