@@ -1,5 +1,6 @@
 Config = {}
 
+Config.Framework = 'esx' -- esx/qbcore
 
 Config.Command = {
     enable = false,
@@ -11,16 +12,26 @@ Config.KeyBind = {
     key = 'H'
 }
 
-SonoStaff = function(ESX, source, identifier)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local group = xPlayer.getGroup()
-
-    for k,v in pairs(Config.AdminGroup) do 
-        if group == v then
-            return true
+SonoStaff = function(Framework, source, identifier)
+    if Config.Framework == 'esx' then
+        local xPlayer = ESX.GetPlayerFromId(source)
+        local group = xPlayer.getGroup()
+    
+        for k,v in pairs(Config.AdminGroup) do 
+            if group == v then
+                return true
+            end
         end
+        return false
+    elseif Config.Framework == 'qbcore' then
+    
+        for k,v in pairs(Config.AdminGroup) do 
+            if QBCore.Functions.HasPermission(source, v) then
+                return true
+            end
+        end
+        return false
     end
-    return false
 end
 
 Config.AdminGroup = {
