@@ -1,4 +1,8 @@
-local ESX = exports.es_extended:getSharedObject()
+if Config.Framework == 'esx' then 
+    ESX = exports.es_extended:getSharedObject()
+elseif Config.Framework == 'qbcore' then
+    QBCore = exports['qb-core']:GetCoreObject()
+end
 
 
 CheckFileBlip = function()
@@ -19,39 +23,77 @@ AddEventHandler('onResourceStart', function(resName)
     end
 end)
 
-ESX.RegisterServerCallback('ricky-server:getBlips', function(source, cb)
-    local nomeRisorsa = GetCurrentResourceName()
-    local fileBlip = LoadResourceFile(nomeRisorsa, 'blips.json')
+if Config.Framework == 'esx' then 
+    ESX.RegisterServerCallback('ricky-server:getBlips', function(source, cb)
+        local nomeRisorsa = GetCurrentResourceName()
+        local fileBlip = LoadResourceFile(nomeRisorsa, 'blips.json')
+    
+        if CheckFileBlip() == false then return end 
+    
+        local blips = json.decode(fileBlip)
+    end)
+elseif Config.Framework == 'qbcore' then
+    QBCore.Functions.CreateCallback('ricky-server:getBlips', function(source, cb)
+        local nomeRisorsa = GetCurrentResourceName()
+        local fileBlip = LoadResourceFile(nomeRisorsa, 'blips.json')
+    
+        if CheckFileBlip() == false then return end 
+    
+        local blips = json.decode(fileBlip)
+    end)
+end
 
-    if CheckFileBlip() == false then return end 
-
-    local blips = json.decode(fileBlip)
-end)
-
-ESX.RegisterServerCallback('ricky-server:blipGetCreatedBlip', function(source, cb)
-    local nomeRisorsa = GetCurrentResourceName()
-    local fileBlip = LoadResourceFile(nomeRisorsa, 'blips.json')
-
-    if CheckFileBlip() == false then return end 
-
-    local blips = {}
-
-    for k, v in pairs(json.decode(fileBlip)) do
-        table.insert(blips, {
-            name = v.name,
-            sprite = v.sprite,
-            color = v.color,
-            coords = v.coords,
-            display = v.display,
-            x = v.coords.x,
-            y = v.coords.y,
-            z = v.coords.z,
-            id = k
-        })
-    end
-
-    cb(blips)
-end)
+if Config.Framework == 'esx' then 
+    ESX.RegisterServerCallback('ricky-server:blipGetCreatedBlip', function(source, cb)
+        local nomeRisorsa = GetCurrentResourceName()
+        local fileBlip = LoadResourceFile(nomeRisorsa, 'blips.json')
+    
+        if CheckFileBlip() == false then return end 
+    
+        local blips = {}
+    
+        for k, v in pairs(json.decode(fileBlip)) do
+            table.insert(blips, {
+                name = v.name,
+                sprite = v.sprite,
+                color = v.color,
+                coords = v.coords,
+                display = v.display,
+                x = v.coords.x,
+                y = v.coords.y,
+                z = v.coords.z,
+                id = k
+            })
+        end
+    
+        cb(blips)
+    end)
+elseif Config.Framework == 'qbcore' then
+    QBCore.Functions.CreateCallback('ricky-server:blipGetCreatedBlip', function(source, cb)
+        local nomeRisorsa = GetCurrentResourceName()
+        local fileBlip = LoadResourceFile(nomeRisorsa, 'blips.json')
+    
+        if CheckFileBlip() == false then return end 
+    
+        local blips = {}
+    
+        for k, v in pairs(json.decode(fileBlip)) do
+            table.insert(blips, {
+                name = v.name,
+                sprite = v.sprite,
+                color = v.color,
+                coords = v.coords,
+                display = v.display,
+                x = v.coords.x,
+                y = v.coords.y,
+                z = v.coords.z,
+                id = k
+            })
+        end
+    
+        cb(blips)
+    end)
+end
 
 function string.split(inputString, delimiter)
     local result = {}
@@ -138,7 +180,14 @@ AddEventHandler('ricky-server:blipEditBlip', function(id, name, sprite, color, c
 end)
 
 
-ESX.RegisterServerCallback('ricky-server:blipSonoStaff', function(source, cb)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    cb(SonoStaff(ESX, xPlayer.source, xPlayer.identifier))
-end)
+if Config.Framework == 'esx' then 
+    ESX.RegisterServerCallback('ricky-server:blipSonoStaff', function(source, cb)
+        local xPlayer = ESX.GetPlayerFromId(source)
+        cb(SonoStaff(ESX, xPlayer.source, xPlayer.identifier))
+    end)
+elseif Config.Framework == 'qbcore' then
+    QBCore.Functions.CreateCallback('ricky-server:blipSonoStaff', function(source, cb)
+        local xPlayer = QBCore.Functions.GetPlayer(source)
+        cb(SonoStaff(QBCore, xPlayer.source, xPlayer.identifier))
+    end)
+end
