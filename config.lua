@@ -3,7 +3,7 @@ Config = {}
 Config.Framework = 'esx' -- esx/qbcore
 
 Config.Command = {
-    enable = false,
+    enable = true,
     commandName = 'blip'
 }
 
@@ -13,6 +13,7 @@ Config.KeyBind = {
 }
 
 SonoStaff = function(Framework, source, identifier)
+    print(Config.Framework)
     if Config.Framework == 'esx' then
         local xPlayer = ESX.GetPlayerFromId(source)
         local group = xPlayer.getGroup()
@@ -24,10 +25,9 @@ SonoStaff = function(Framework, source, identifier)
         end
         return false
     elseif Config.Framework == 'qbcore' then
-    
         for k,v in pairs(Config.AdminGroup) do 
-            if QBCore.Functions.HasPermission(source, v) then
-                return true
+            if QBCore.Functions.HasPermission(source, v) then 
+                return true 
             end
         end
         return false
