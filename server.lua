@@ -188,6 +188,9 @@ if Config.Framework == 'esx' then
 elseif Config.Framework == 'qbcore' then
     QBCore.Functions.CreateCallback('ricky-server:blipSonoStaff', function(source, cb)
         local xPlayer = QBCore.Functions.GetPlayer(source)
-        cb(SonoStaff(QBCore, xPlayer.source, xPlayer.identifier))
+
+        cb(SonoStaff(QBCore, source, xPlayer.identifier))
     end)
 end
+
+
