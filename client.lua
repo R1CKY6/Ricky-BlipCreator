@@ -24,7 +24,6 @@ SonoStaff1 = function()
         while staff1 == nil do
             Wait(100)
         end
-        print(staff1)
         return staff1
     end
 end
